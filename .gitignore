@@ -26,3 +26,8 @@ bin/
 .project
 .settings/
 .vscode/
+/KlijentProjekat/nbproject/private/
+/ServerProjekat/nbproject/private/
+/ZajednickiObuca/nbproject/private/
+/KlijentObuca/nbproject/private/
+/ServerObuca/nbproject/private/
