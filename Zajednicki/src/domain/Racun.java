@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class Racun extends AbstractDomainObject {
 
+  
     private Long racunID;
     private Date datumVreme;
     private String status;
@@ -23,8 +24,12 @@ public class Racun extends AbstractDomainObject {
     private double ukupanIznos;
     private Prodavac prodavac;
     private Musterija musterija;
+    private ArrayList<StavkaRacuna> stavkeRacuna;
 
-    public Racun(Long racunID, Date datumVreme, String status, Long stornoOdRacunaID, double ukupanIznos, Prodavac prodavac, Musterija musterija) {
+    public Racun() {
+    }
+
+    public Racun(Long racunID, Date datumVreme, String status, Long stornoOdRacunaID, double ukupanIznos, Prodavac prodavac, Musterija musterija, ArrayList<StavkaRacuna> stavkeRacuna) {
         this.racunID = racunID;
         this.datumVreme = datumVreme;
         this.status = status;
@@ -32,9 +37,7 @@ public class Racun extends AbstractDomainObject {
         this.ukupanIznos = ukupanIznos;
         this.prodavac = prodavac;
         this.musterija = musterija;
-    }
-
-    public Racun() {
+        this.stavkeRacuna = stavkeRacuna;
     }
 
     @Override
@@ -49,23 +52,46 @@ public class Racun extends AbstractDomainObject {
 
     @Override
     public String join() {
-        return " JOIN PRODAVAC P ON (R.PRODAVACID = P.PRODAVACID) "
-                + "JOIN MUSTERIJA M ON (R.MUSTERIJAID = M.MUSTERIJAID) ";
+        return " JOIN PRODAVAC P ON ( P.PRODAVACID = R.PRODAVACID ) "
+                + " JOIN MUSTERIJA M ON ( M.MUSTERIJAID = R.MUSTERIJAID ) "
+                + " JOIN LOKACIJA L ON ( L.LOKACIJAID = M.LOKACIJAID ) ";
     }
 
     @Override
     public ArrayList<AbstractDomainObject> vratiListu(ResultSet rs) throws SQLException {
         ArrayList<AbstractDomainObject> lista = new ArrayList<>();
         while (rs.next()) {
-            Prodavac p = new Prodavac(rs.getLong("ProdavacID"), rs.getString("P.Ime"), rs.getString("P.Prezime"),
-                    rs.getString("P.KorisnickoIme"), rs.getString("P.Lozinka"));
-            Lokacija l = new Lokacija(rs.getLong("LokacijaID"),
-                    rs.getString("L.Grad"), rs.getString("L.Ulica"), rs.getInt("L.Broj"));
-            Musterija m = new Musterija(rs.getLong("MusterijaID"), rs.getString("M.Ime"), rs.getString("M.Prezime"),
-                    rs.getString("M.Email"), rs.getString("M.Telefon"), l);
-            Racun r = new Racun(rs.getLong("RacunID"), rs.getTimestamp("R.DatumVreme"),
-                    rs.getString("R.STATUS"), rs.getLong("R.StornoOdRacunaID"), rs.getDouble("R.UkupanIznos"),
-                    p, m);
+            Lokacija l = new Lokacija(
+                    rs.getLong("LokacijaID"),
+                    rs.getString("L.Grad"),
+                    rs.getString("L.Ulica"),
+                    rs.getInt("L.Broj")
+            );
+            Musterija m = new Musterija(
+                    rs.getLong("MusterijaID"),
+                    rs.getString("M.Ime"),
+                    rs.getString("M.Prezime"),
+                    rs.getString("M.Email"),
+                    rs.getString("M.Telefon"),
+                    l
+            );
+            Prodavac p = new Prodavac(
+                    rs.getLong("ProdavacID"),
+                    rs.getString("ime"),
+                    rs.getString("prezime"),
+                    rs.getString("korisnickoIme"),
+                    rs.getString("lozinka")
+            );
+            Racun r = new Racun(
+                    rs.getLong("RacunID"),
+                    rs.getTimestamp("R.DatumVreme"),
+                    rs.getString("R.Status"),
+                    rs.getLong("StornoOdRacunaID"),
+                    rs.getDouble("R.UkupanIznos"),
+                    p,
+                    m,
+                    new ArrayList<>()
+            );
             lista.add(r);
         }
         rs.close();
@@ -79,8 +105,9 @@ public class Racun extends AbstractDomainObject {
 
     @Override
     public String vrednostiZaInsert() {
-        return " '" + new Timestamp(datumVreme.getTime()) + "', '" + status + "' " + stornoOdRacunaID + ", " + ukupanIznos + ", " + prodavac.getProdavacID() + ", "
-                + musterija.getMusterijaID() + " ";
+        return " '" + new Timestamp(datumVreme.getTime()) + "', "
+                + "'" + status + "', " + stornoOdRacunaID + ", " + ukupanIznos + ", "
+                + prodavac.getProdavacID() + ", " + musterija.getMusterijaID();
     }
 
     @Override
@@ -105,7 +132,7 @@ public class Racun extends AbstractDomainObject {
 
     @Override
     public String orderBy() {
-        return " ORDERBY RACUNID ASC ";
+        return " ORDER BY RACUNID ASC ";
     }
 
     public Long getRacunID() {
@@ -132,14 +159,6 @@ public class Racun extends AbstractDomainObject {
         this.status = status;
     }
 
-    public Long getStornoOdRacunaID() {
-        return stornoOdRacunaID;
-    }
-
-    public void setStornoOdRacunaID(Long stornoOdRacunaID) {
-        this.stornoOdRacunaID = stornoOdRacunaID;
-    }
-
     public double getUkupanIznos() {
         return ukupanIznos;
     }
@@ -164,4 +183,19 @@ public class Racun extends AbstractDomainObject {
         this.musterija = musterija;
     }
 
+    public ArrayList<StavkaRacuna> getStavkeRacuna() {
+        return stavkeRacuna;
+    }
+
+    public void setStavkeRacuna(ArrayList<StavkaRacuna> stavkeRacuna) {
+        this.stavkeRacuna = (stavkeRacuna != null) ? stavkeRacuna : new ArrayList<>();
+    }
+
+    public Long getStornoOdRacunaID() {
+        return stornoOdRacunaID;
+    }
+
+    public void setStornoOdRacunaID(Long stornoOdRacunaID) {
+        this.stornoOdRacunaID = stornoOdRacunaID;
+    }
 }
