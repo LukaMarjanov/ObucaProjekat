@@ -1,0 +1,53 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package controller;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import session.Session;
+import transfer.Request;
+import transfer.Response;
+import transfer.util.ResponseStatus;
+
+/**
+ *
+ * @author Luka
+ */
+public class ClientController {
+
+    private static ClientController instance;
+
+    public ClientController() {
+    }
+
+    public static ClientController getInstance() {
+        if (instance == null) {
+            instance = new ClientController();
+        }
+        return instance;
+    }
+    
+    private synchronized Object sendRequest(int operation,Object data) throws Exception{
+        //kreiramo zahtev
+        Request request = new Request(operation, data);
+        //Saljemo zahtev
+        ObjectOutputStream oos = new ObjectOutputStream(Session.getInstance().getSocket().getOutputStream());
+        oos.writeObject(request);
+        
+        //Primamo odgovor
+        ObjectInputStream ois = new ObjectInputStream(Session.getInstance().getSocket().getInputStream());
+        Response response = (Response) ois.readObject();
+        
+        if(response.getResponseStatus().equals(ResponseStatus.Error)){
+            throw response.getExc();
+        }else{
+            return response.getData();
+        }
+        
+        
+        
+    }
+
+}
