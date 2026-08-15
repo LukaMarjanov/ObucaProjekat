@@ -91,7 +91,7 @@ public class Prodavac extends AbstractDomainObject{
 
     @Override
     public String orderBy() {
-        return " ORDERBY PRODAVACID ASC ";
+        return " ORDER BY PRODAVACID ASC ";
     }
 
     @Override

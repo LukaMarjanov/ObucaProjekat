@@ -81,7 +81,7 @@ public class Iskustvo extends AbstractDomainObject{
 
     @Override
     public String orderBy() {
-        return " ORDERBY ISKUSTVOID ASC ";
+        return " ORDER BY ISKUSTVOID ASC ";
     }
 
     public Long getIskustvoID() {

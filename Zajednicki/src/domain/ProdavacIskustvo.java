@@ -87,7 +87,7 @@ public class ProdavacIskustvo extends AbstractDomainObject {
 
     @Override
     public String orderBy() {
-        return " ORDERBY ISKUSTVOID ASC ";
+        return " ORDER BY ISKUSTVOID ASC ";
     }
 
     public Prodavac getProdavac() {

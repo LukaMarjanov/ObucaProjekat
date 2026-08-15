@@ -86,7 +86,7 @@ public class Lokacija extends AbstractDomainObject {
 
     @Override
     public String orderBy() {
-        return " ORDERBY LOKACIJAID ASC ";
+        return " ORDER BY LOKACIJAID ASC ";
     }
 
     public Long getLokacijaID() {

@@ -93,7 +93,7 @@ public class Musterija extends AbstractDomainObject {
 
     @Override
     public String orderBy() {
-        return " ORDERBY MUSTERIJAID ASC ";
+        return " ORDER BY MUSTERIJAID ASC ";
     }
 
     public Long getMusterijaID() {

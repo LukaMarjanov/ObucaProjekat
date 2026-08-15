@@ -4,6 +4,8 @@
  */
 package thread;
 
+import controller.ServerController;
+import domain.Prodavac;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import transfer.Request;
 import transfer.Response;
+import transfer.util.Operation;
 import transfer.util.ResponseStatus;
 
 /**
@@ -52,7 +55,11 @@ public class ThreadClient extends Thread {
         Response response = new Response(null, null, ResponseStatus.Success);
         try {
             switch (request.getOperation()) {
-                
+                case Operation.LOGIN:
+                    Prodavac prodavac = (Prodavac) request.getData();
+                    Prodavac pro = ServerController.getInstance().login(prodavac);
+                    response.setData(pro);
+                    break;
                 
                 default:
                     return null;

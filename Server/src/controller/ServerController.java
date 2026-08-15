@@ -6,6 +6,7 @@ package controller;
 
 import domain.Prodavac;
 import java.util.ArrayList;
+import so.login.SOLogin;
 
 /**
  *
@@ -29,6 +30,12 @@ public class ServerController {
 
     public void setUlogovaniProdavci(ArrayList<Prodavac> ulogovaniProdavci) {
         this.ulogovaniProdavci = ulogovaniProdavci;
+    }
+
+    public Prodavac login(Prodavac prodavac) throws Exception {
+        SOLogin so = new SOLogin();
+        so.templateExecute(prodavac);
+        return so.getUlogovani();
     }
     
     

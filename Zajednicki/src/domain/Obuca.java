@@ -88,7 +88,7 @@ public class Obuca extends AbstractDomainObject{
 
     @Override
     public String orderBy() {
-        return " ORDERBY OBUCAID ASC ";
+        return " ORDER BY OBUCAID ASC ";
     }
 
     public Long getObucaID() {

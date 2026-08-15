@@ -4,11 +4,13 @@
  */
 package controller;
 
+import domain.Prodavac;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import session.Session;
 import transfer.Request;
 import transfer.Response;
+import transfer.util.Operation;
 import transfer.util.ResponseStatus;
 
 /**
@@ -48,6 +50,10 @@ public class ClientController {
         
         
         
+    }
+
+    public Prodavac login(Prodavac p) throws Exception {
+        return (Prodavac) sendRequest(Operation.LOGIN, p);
     }
 
 }
