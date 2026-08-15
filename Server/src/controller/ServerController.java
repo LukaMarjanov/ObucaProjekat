@@ -4,21 +4,23 @@
  */
 package controller;
 
+import domain.Obuca;
 import domain.Prodavac;
 import java.util.ArrayList;
 import so.login.SOLogin;
+import so.obuca.SOGetAllObuca;
 
 /**
  *
  * @author Luka
  */
 public class ServerController {
-    
+
     private static ServerController instance;
     private ArrayList<Prodavac> ulogovaniProdavci = new ArrayList<>();
 
     public static ServerController getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new ServerController();
         }
         return instance;
@@ -37,6 +39,11 @@ public class ServerController {
         so.templateExecute(prodavac);
         return so.getUlogovani();
     }
-    
-    
+
+    public ArrayList<Obuca> getAllObuca(Obuca obuca) throws Exception {
+        SOGetAllObuca so = new SOGetAllObuca();
+        so.templateExecute(obuca);
+        return so.getLista();
+    }
+
 }

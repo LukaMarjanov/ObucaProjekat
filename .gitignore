@@ -38,3 +38,5 @@ bin/
 /Zajednicki/dist/
 /Server/build/
 /Klijent/build/
+/Server/dist/
+/Klijent/dist/

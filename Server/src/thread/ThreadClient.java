@@ -5,6 +5,7 @@
 package thread;
 
 import controller.ServerController;
+import domain.Obuca;
 import domain.Prodavac;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,13 +23,13 @@ import transfer.util.ResponseStatus;
  * @author Luka
  */
 public class ThreadClient extends Thread {
-
+    
     Socket socket;
-
+    
     public ThreadClient(Socket socket) {
         this.socket = socket;
     }
-
+    
     @Override
     public void run() {
         while (!socket.isClosed()) {
@@ -43,14 +44,14 @@ public class ThreadClient extends Thread {
                 //saljemo odgovor klijentu
                 ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                 oos.writeObject(response);
-
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
+            
         }
     }
-
+    
     private Response handleRequest(Request request) {
         Response response = new Response(null, null, ResponseStatus.Success);
         try {
@@ -59,6 +60,9 @@ public class ThreadClient extends Thread {
                     Prodavac prodavac = (Prodavac) request.getData();
                     Prodavac pro = ServerController.getInstance().login(prodavac);
                     response.setData(pro);
+                    break;
+                case Operation.GET_ALL_OBUCA:
+                    response.setData(ServerController.getInstance().getAllObuca((Obuca) request.getData()));
                     break;
                 
                 default:
@@ -70,5 +74,5 @@ public class ThreadClient extends Thread {
         }
         return response;
     }
-
+    
 }

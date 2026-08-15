@@ -28,6 +28,12 @@ public class Obuca extends AbstractDomainObject{
         this.cena = cena;
     }
 
+    @Override
+    public String toString() {
+        return tipObuce + " (" + velicina + ", " + boja + ", Cena: " + cena + " din)";
+    }
+
+    
     public Obuca() {
     }
     

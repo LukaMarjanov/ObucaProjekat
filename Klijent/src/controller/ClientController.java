@@ -4,9 +4,11 @@
  */
 package controller;
 
+import domain.Obuca;
 import domain.Prodavac;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import session.Session;
 import transfer.Request;
 import transfer.Response;
@@ -54,6 +56,10 @@ public class ClientController {
 
     public Prodavac login(Prodavac p) throws Exception {
         return (Prodavac) sendRequest(Operation.LOGIN, p);
+    }
+
+    public ArrayList<Obuca> getAllObuca(Obuca obuca) throws Exception {
+        return (ArrayList<Obuca>) sendRequest(Operation.GET_ALL_OBUCA, obuca);
     }
 
 }
