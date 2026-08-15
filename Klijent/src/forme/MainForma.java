@@ -5,6 +5,7 @@
 package forme;
 
 import controller.ClientController;
+import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MainForma extends javax.swing.JFrame {
         this.ulogovani = Session.getInstance().getUlogovani();
         lblUlogovani.setText("Ulogovani prodavac: " + ulogovani);
         popuniObucu();
+        popuniMusterije();
     }
 
     /**
@@ -447,7 +449,22 @@ public class MainForma extends javax.swing.JFrame {
                 cmbObuca.addItem(o);
             }
         } catch (Exception ex) {
-            // Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void popuniMusterije() {
+        try {
+            ArrayList<Musterija> listaMusterija = ClientController.getInstance().getAllMusterija(new Musterija(null,
+                    "", "", "", "", null));
+
+            cmbMusterija.removeAllItems();
+
+            for (Musterija musterija : listaMusterija) {
+                cmbMusterija.addItem(musterija);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

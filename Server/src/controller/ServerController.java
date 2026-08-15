@@ -4,10 +4,12 @@
  */
 package controller;
 
+import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
 import java.util.ArrayList;
 import so.login.SOLogin;
+import so.musterija.SOGetAllMusterija;
 import so.obuca.SOGetAllObuca;
 
 /**
@@ -43,6 +45,12 @@ public class ServerController {
     public ArrayList<Obuca> getAllObuca(Obuca obuca) throws Exception {
         SOGetAllObuca so = new SOGetAllObuca();
         so.templateExecute(obuca);
+        return so.getLista();
+    }
+
+    public ArrayList<Musterija> getAllMusterija(Musterija musterija) throws Exception {
+        SOGetAllMusterija so = new SOGetAllMusterija();
+        so.templateExecute(musterija);
         return so.getLista();
     }
 

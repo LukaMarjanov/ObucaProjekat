@@ -33,7 +33,7 @@ public class ThreadServer extends Thread {
                 System.out.println("Cekanje klijenta");
                 Socket socket = serverSocket.accept();
                 System.out.println("Klijent se povezao");
-                ThreadClient th = new ThreadClient(socket);
+                ThreadClient1 th = new ThreadClient1(socket);
                 th.start();
             } catch (IOException ex) {
                 Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);

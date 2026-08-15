@@ -5,6 +5,7 @@
 package thread;
 
 import controller.ServerController;
+import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
 import java.io.IOException;
@@ -22,11 +23,11 @@ import transfer.util.ResponseStatus;
  *
  * @author Luka
  */
-public class ThreadClient extends Thread {
+public class ThreadClient1 extends Thread {
     
     Socket socket;
     
-    public ThreadClient(Socket socket) {
+    public ThreadClient1(Socket socket) {
         this.socket = socket;
     }
     
@@ -64,7 +65,9 @@ public class ThreadClient extends Thread {
                 case Operation.GET_ALL_OBUCA:
                     response.setData(ServerController.getInstance().getAllObuca((Obuca) request.getData()));
                     break;
-                
+                case Operation.GET_ALL_MUSTERIJA:
+                    response.setData(ServerController.getInstance().getAllMusterija((Musterija) request.getData()));
+                    break;
                 default:
                     return null;
             }

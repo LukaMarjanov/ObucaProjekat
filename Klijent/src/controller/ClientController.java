@@ -4,6 +4,7 @@
  */
 package controller;
 
+import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
 import java.io.ObjectInputStream;
@@ -60,6 +61,10 @@ public class ClientController {
 
     public ArrayList<Obuca> getAllObuca(Obuca obuca) throws Exception {
         return (ArrayList<Obuca>) sendRequest(Operation.GET_ALL_OBUCA, obuca);
+    }
+
+    public ArrayList<Musterija> getAllMusterija(Musterija musterija) throws Exception {
+       return (ArrayList<Musterija>) sendRequest(Operation.GET_ALL_MUSTERIJA, musterija);
     }
 
 }
