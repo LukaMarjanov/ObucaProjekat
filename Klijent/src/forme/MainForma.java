@@ -115,6 +115,12 @@ public class MainForma extends javax.swing.JFrame {
             }
         });
 
+        txtKolicina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtKolicinaKeyReleased(evt);
+            }
+        });
+
         tblStavke.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -360,6 +366,24 @@ public class MainForma extends javax.swing.JFrame {
             txtIznos.setText(String.valueOf(o.getCena() * kolicina));
         }
     }//GEN-LAST:event_cmbObucaItemStateChanged
+
+    private void txtKolicinaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKolicinaKeyReleased
+        if (evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') {
+            Obuca o = (Obuca) cmbObuca.getSelectedItem();
+            int kolicina = Integer.parseInt(txtKolicina.getText());
+
+            if (kolicina == 0) {
+                txtKolicina.setText("");
+                txtIznos.setText("");
+                return;
+            }
+
+            txtIznos.setText(String.valueOf(o.getCena() * kolicina));
+        } else {
+            txtKolicina.setText("");
+            txtIznos.setText("");
+        }
+    }//GEN-LAST:event_txtKolicinaKeyReleased
 
     /**
      * @param args the command line arguments

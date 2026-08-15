@@ -371,6 +371,9 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtKolicina">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKolicinaKeyReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtIznos">
                 </Component>
