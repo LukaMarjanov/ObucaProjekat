@@ -70,4 +70,8 @@ public class ClientController {
         sendRequest(Operation.ADD_RACUN, r);
     }
 
+    public ArrayList<Racun> getAllRacun(Racun racun) throws Exception {
+        return (ArrayList<Racun>) sendRequest(Operation.GET_ALL_RACUN, racun);
+    }
+
 }

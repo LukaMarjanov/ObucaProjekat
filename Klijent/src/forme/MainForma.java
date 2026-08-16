@@ -10,6 +10,7 @@ import domain.Obuca;
 import domain.Prodavac;
 import domain.Racun;
 import domain.StavkaRacuna;
+import form_racun.FormPretragaRacuna;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -34,8 +35,8 @@ public class MainForma extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Klijentska forma");
-        Session.getInstance().setMf(this);
         this.ulogovani = Session.getInstance().getUlogovani();
+        Session.getInstance().setMf(this);
         lblUlogovani.setText("Ulogovani prodavac: " + ulogovani);
         popuniObucu();
         popuniMusterije();
@@ -106,7 +107,11 @@ public class MainForma extends javax.swing.JFrame {
 
         lblUlogovani.setText("Ulogovani");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         jLabel2.setText("Racun:");
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel3.setText("Stavka racuna");
 
@@ -182,7 +187,7 @@ public class MainForma extends javax.swing.JFrame {
                 .addComponent(btnDodajStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +291,7 @@ public class MainForma extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -328,6 +333,11 @@ public class MainForma extends javax.swing.JFrame {
         jMenu5.setText("Racun");
 
         miPretragaRacuna.setText("Pretraga racuna");
+        miPretragaRacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miPretragaRacunaActionPerformed(evt);
+            }
+        });
         jMenu5.add(miPretragaRacuna);
 
         jMenuBar1.add(jMenu5);
@@ -456,10 +466,14 @@ public class MainForma extends javax.swing.JFrame {
             tm.getLista().clear();
             tm.fireTableDataChanged();
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio racun");
-        }catch(Exception ex){
-             JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnSacuvajActionPerformed
+
+    private void miPretragaRacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPretragaRacunaActionPerformed
+        new FormPretragaRacuna(this, true).setVisible(true);
+    }//GEN-LAST:event_miPretragaRacunaActionPerformed
 
     /**
      * @param args the command line arguments

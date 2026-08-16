@@ -14,6 +14,7 @@ public interface Operation {
     public static final int GET_ALL_OBUCA = 2;
     public static final int GET_ALL_MUSTERIJA = 3;
     public static final int ADD_RACUN = 4;
+    public static final int GET_ALL_RACUN = 5;
   
     
 }

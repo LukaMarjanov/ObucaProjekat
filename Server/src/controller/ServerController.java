@@ -13,6 +13,7 @@ import so.login.SOLogin;
 import so.musterija.SOGetAllMusterija;
 import so.obuca.SOGetAllObuca;
 import so.racun.SOAddRacun;
+import so.racun.SOGetAllRacun;
 
 /**
  *
@@ -59,6 +60,12 @@ public class ServerController {
     public void addRacun(Racun racun) throws Exception {
         SOAddRacun so = new SOAddRacun();
         so.templateExecute(racun);
+    }
+
+    public ArrayList<Racun> getAllRacun(Racun racun) throws Exception {
+        SOGetAllRacun so = new SOGetAllRacun();
+        so.templateExecute(racun);
+        return so.getLista();
     }
 
 }
