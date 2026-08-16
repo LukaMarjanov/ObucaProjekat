@@ -116,4 +116,8 @@ public class TableModelRacuni extends AbstractTableModel implements Runnable {
         }
     }
 
+    public Racun getSelectedRacun(int row) {
+        return lista.get(row);
+    }
+
 }

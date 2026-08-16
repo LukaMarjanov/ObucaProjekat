@@ -4,6 +4,12 @@
  */
 package form_racun;
 
+import controller.ClientController;
+import domain.Racun;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import models.TableModelRacuni;
 
 /**
@@ -137,7 +143,23 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPrezimeKeyReleased
 
     private void btnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetaljiActionPerformed
-        // TODO add your handling code here:
+        int row = tblRacuni.getSelectedRow();
+        
+        if (row != -1) {
+            try {
+                Racun r = ((TableModelRacuni) tblRacuni.getModel()).getSelectedRacun(row);
+                ArrayList<Racun> listaIzBaze = ClientController.getInstance().getAllRacun(r);
+                
+                
+                new FormDetaljiRacuna(this, true, listaIzBaze.get(0)).setVisible(true);
+                
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje racun!",
+                        "Obavestenje", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(FormPretragaRacuna.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnDetaljiActionPerformed
 
     /**
