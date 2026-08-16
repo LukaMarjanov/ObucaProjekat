@@ -39,7 +39,7 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtIme = new javax.swing.JTextField();
         txtPrezime = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnDetalji = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,7 +72,12 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Detalji racuna");
+        btnDetalji.setText("Detalji racuna");
+        btnDetalji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetaljiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,7 +100,7 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(235, 235, 235)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +117,7 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnDetalji)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -130,6 +135,10 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
         TableModelRacuni tm = (TableModelRacuni) tblRacuni.getModel();
         tm.setParametarPrezime(prezime);
     }//GEN-LAST:event_txtPrezimeKeyReleased
+
+    private void btnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetaljiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetaljiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +183,7 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDetalji;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

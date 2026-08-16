@@ -74,4 +74,8 @@ public class ClientController {
         return (ArrayList<Racun>) sendRequest(Operation.GET_ALL_RACUN, racun);
     }
 
+    public void logout(Prodavac ulogovani) throws Exception {
+        sendRequest(Operation.LOGOUT, ulogovani);
+    }
+
 }

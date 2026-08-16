@@ -68,4 +68,8 @@ public class ServerController {
         return so.getLista();
     }
 
+    public void logout(Prodavac ulogovani) {
+        ulogovaniProdavci.remove(ulogovani);
+    }
+
 }

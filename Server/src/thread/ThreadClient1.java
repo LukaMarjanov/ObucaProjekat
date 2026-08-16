@@ -75,6 +75,10 @@ public class ThreadClient1 extends Thread {
                 case Operation.GET_ALL_RACUN:
                     response.setData(ServerController.getInstance().getAllRacun((Racun) request.getData()));
                     break;
+                case Operation.LOGOUT:
+                    Prodavac ulogovani = (Prodavac) request.getData();
+                    ServerController.getInstance().logout(ulogovani);
+                    break;
                 default:
                     return null;
             }

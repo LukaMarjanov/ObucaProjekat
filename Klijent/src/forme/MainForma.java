@@ -11,10 +11,13 @@ import domain.Prodavac;
 import domain.Racun;
 import domain.StavkaRacuna;
 import form_racun.FormPretragaRacuna;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.TableModelStavkeRacuna;
 import session.Session;
@@ -43,6 +46,24 @@ public class MainForma extends javax.swing.JFrame {
         tblStavke.setModel(new TableModelStavkeRacuna());
         txtIznos.setEditable(false);
         txtUkupanIznos.setEditable(false);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        {
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    int response = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da se odjavite?",
+                            "Potvrda odjave", JOptionPane.YES_NO_OPTION);
+                    if(response == JOptionPane.YES_OPTION){
+                        try{
+                            ClientController.getInstance().logout(ulogovani);
+                            System.exit(0);
+                        }catch(Exception ex){
+                            Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -345,6 +366,11 @@ public class MainForma extends javax.swing.JFrame {
         jMenu6.setText("Odjava");
 
         miOdjaviSe.setText("Odjavi se");
+        miOdjaviSe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOdjaviSeActionPerformed(evt);
+            }
+        });
         jMenu6.add(miOdjaviSe);
 
         jMenuBar1.add(jMenu6);
@@ -474,6 +500,24 @@ public class MainForma extends javax.swing.JFrame {
     private void miPretragaRacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPretragaRacunaActionPerformed
         new FormPretragaRacuna(this, true).setVisible(true);
     }//GEN-LAST:event_miPretragaRacunaActionPerformed
+
+    private void miOdjaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOdjaviSeActionPerformed
+        int result = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da se odjavite?",
+                "Konfirmacija", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.NO_OPTION) {
+            return;
+        }
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                ClientController.getInstance().logout(ulogovani);
+                new LoginForma().setVisible(true);
+                Session.getInstance().setUlogovani(null);
+                this.dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_miOdjaviSeActionPerformed
 
     /**
      * @param args the command line arguments
