@@ -20,6 +20,16 @@ public class Prodavac extends AbstractDomainObject{
     private String korisnickoIme;
     private String lozinka; 
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null || (!(obj instanceof Prodavac))){
+            return false;
+        }
+        return ((Prodavac) obj).getProdavacID().equals(this.prodavacID);
+    }
+    
+    
+
     public Prodavac(Long prodavacID, String ime, String prezime, String email, String lozinka) {
         this.prodavacID = prodavacID;
         this.ime = ime;
