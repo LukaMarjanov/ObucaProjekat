@@ -8,6 +8,7 @@ import controller.ServerController;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
+import domain.Racun;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -67,6 +68,9 @@ public class ThreadClient1 extends Thread {
                     break;
                 case Operation.GET_ALL_MUSTERIJA:
                     response.setData(ServerController.getInstance().getAllMusterija((Musterija) request.getData()));
+                    break;
+                case Operation.ADD_RACUN:
+                    ServerController.getInstance().addRacun((Racun) request.getData());
                     break;
                 default:
                     return null;

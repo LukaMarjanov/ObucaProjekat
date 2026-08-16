@@ -402,11 +402,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Dodaj stavku"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajStavkuActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnObrisiStavku">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Obrisi stavku"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrisiStavkuActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -441,6 +447,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sacuvaj racun"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSacuvajActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

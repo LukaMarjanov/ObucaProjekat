@@ -12,9 +12,9 @@ import java.util.ArrayList;
  *
  * @author Luka
  */
-public class StavkaRacuna extends AbstractDomainObject{
+public class StavkaRacuna extends AbstractDomainObject {
 
-     private Racun racun;
+    private Racun racun;
     private int rb;
     private int kolicina;
     private double cena;

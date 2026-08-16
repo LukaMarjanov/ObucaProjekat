@@ -7,10 +7,12 @@ package controller;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
+import domain.Racun;
 import java.util.ArrayList;
 import so.login.SOLogin;
 import so.musterija.SOGetAllMusterija;
 import so.obuca.SOGetAllObuca;
+import so.racun.SOAddRacun;
 
 /**
  *
@@ -52,6 +54,11 @@ public class ServerController {
         SOGetAllMusterija so = new SOGetAllMusterija();
         so.templateExecute(musterija);
         return so.getLista();
+    }
+
+    public void addRacun(Racun racun) throws Exception {
+        SOAddRacun so = new SOAddRacun();
+        so.templateExecute(racun);
     }
 
 }

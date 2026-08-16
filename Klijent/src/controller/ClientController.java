@@ -7,6 +7,7 @@ package controller;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
+import domain.Racun;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -33,26 +34,24 @@ public class ClientController {
         }
         return instance;
     }
-    
-    private synchronized Object sendRequest(int operation,Object data) throws Exception{
+
+    private synchronized Object sendRequest(int operation, Object data) throws Exception {
         //kreiramo zahtev
         Request request = new Request(operation, data);
         //Saljemo zahtev
         ObjectOutputStream oos = new ObjectOutputStream(Session.getInstance().getSocket().getOutputStream());
         oos.writeObject(request);
-        
+
         //Primamo odgovor
         ObjectInputStream ois = new ObjectInputStream(Session.getInstance().getSocket().getInputStream());
         Response response = (Response) ois.readObject();
-        
-        if(response.getResponseStatus().equals(ResponseStatus.Error)){
+
+        if (response.getResponseStatus().equals(ResponseStatus.Error)) {
             throw response.getExc();
-        }else{
+        } else {
             return response.getData();
         }
-        
-        
-        
+
     }
 
     public Prodavac login(Prodavac p) throws Exception {
@@ -64,7 +63,11 @@ public class ClientController {
     }
 
     public ArrayList<Musterija> getAllMusterija(Musterija musterija) throws Exception {
-       return (ArrayList<Musterija>) sendRequest(Operation.GET_ALL_MUSTERIJA, musterija);
+        return (ArrayList<Musterija>) sendRequest(Operation.GET_ALL_MUSTERIJA, musterija);
+    }
+
+    public void addRacun(Racun r) throws Exception {
+        sendRequest(Operation.ADD_RACUN, r);
     }
 
 }

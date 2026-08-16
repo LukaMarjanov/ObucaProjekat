@@ -8,9 +8,14 @@ import controller.ClientController;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
+import domain.Racun;
+import domain.StavkaRacuna;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import models.TableModelStavkeRacuna;
 import session.Session;
 
 /**
@@ -34,6 +39,9 @@ public class MainForma extends javax.swing.JFrame {
         lblUlogovani.setText("Ulogovani prodavac: " + ulogovani);
         popuniObucu();
         popuniMusterije();
+        tblStavke.setModel(new TableModelStavkeRacuna());
+        txtIznos.setEditable(false);
+        txtUkupanIznos.setEditable(false);
     }
 
     /**
@@ -135,8 +143,18 @@ public class MainForma extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblStavke);
 
         btnDodajStavku.setText("Dodaj stavku");
+        btnDodajStavku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajStavkuActionPerformed(evt);
+            }
+        });
 
         btnObrisiStavku.setText("Obrisi stavku");
+        btnObrisiStavku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiStavkuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -200,6 +218,11 @@ public class MainForma extends javax.swing.JFrame {
         cmbMusterija.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSacuvaj.setText("Sacuvaj racun");
+        btnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSacuvajActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -384,6 +407,59 @@ public class MainForma extends javax.swing.JFrame {
             txtIznos.setText("");
         }
     }//GEN-LAST:event_txtKolicinaKeyReleased
+
+    private void btnDodajStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajStavkuActionPerformed
+        if (txtKolicina.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Morate uneti kolicinu stavke");
+            return;
+        }
+
+        Obuca o = (Obuca) cmbObuca.getSelectedItem();
+        int kolicina = Integer.parseInt(txtKolicina.getText());
+        double iznos = Double.parseDouble(txtIznos.getText());
+
+        StavkaRacuna sr = new StavkaRacuna(null, -1, kolicina, o.getCena(), iznos, o);
+
+        TableModelStavkeRacuna tm = (TableModelStavkeRacuna) tblStavke.getModel();
+        tm.dodajStavku(sr);
+
+        ukupanIznos = tm.vratiUkupanIznos();
+        txtUkupanIznos.setText(String.valueOf(ukupanIznos) + "din");
+
+    }//GEN-LAST:event_btnDodajStavkuActionPerformed
+
+    private void btnObrisiStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiStavkuActionPerformed
+        int row = tblStavke.getSelectedRow();
+
+        if (row != -1) {
+            TableModelStavkeRacuna tm = (TableModelStavkeRacuna) tblStavke.getModel();
+
+            tm.obrisiStavkuRacuna(row);
+
+            ukupanIznos = tm.vratiUkupanIznos();
+
+            txtUkupanIznos.setText(String.valueOf(ukupanIznos + "din"));
+
+        }
+    }//GEN-LAST:event_btnObrisiStavkuActionPerformed
+
+    private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
+        try {
+            TableModelStavkeRacuna tm = (TableModelStavkeRacuna) tblStavke.getModel();
+
+            Racun r = new Racun(null, new Date(), "Aktivan", null, ukupanIznos, ulogovani,
+                    (Musterija) cmbMusterija.getSelectedItem(), tm.getLista());
+
+            ClientController.getInstance().addRacun(r);
+            txtUkupanIznos.setText("");
+            ukupanIznos = 0;
+            tm.getLista().clear();
+            tm.fireTableDataChanged();
+            JOptionPane.showMessageDialog(this, "Sistem je zapamtio racun");
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSacuvajActionPerformed
 
     /**
      * @param args the command line arguments
