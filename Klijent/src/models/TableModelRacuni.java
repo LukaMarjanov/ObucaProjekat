@@ -104,7 +104,7 @@ public class TableModelRacuni extends AbstractTableModel implements Runnable {
         refreshTable();
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         try {
             racun.getMusterija().setIme(parametarIme);
             racun.getMusterija().setPrezime(parametarPrezime);

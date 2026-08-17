@@ -213,4 +213,9 @@ public class FormPretragaRacuna extends javax.swing.JDialog {
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtPrezime;
     // End of variables declaration//GEN-END:variables
+
+    void refreshTable() {
+        TableModelRacuni tm = (TableModelRacuni) tblRacuni.getModel();
+        tm.refreshTable();
+    }
 }

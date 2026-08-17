@@ -79,6 +79,9 @@ public class ThreadClient1 extends Thread {
                     Prodavac ulogovani = (Prodavac) request.getData();
                     ServerController.getInstance().logout(ulogovani);
                     break;
+                case Operation.UPDATE_RACUN:
+                    ServerController.getInstance().updateRacun((Racun) request.getData());
+                    break;
                 default:
                     return null;
             }

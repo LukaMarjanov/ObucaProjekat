@@ -9,6 +9,7 @@ import domain.Obuca;
 import domain.Racun;
 import domain.StavkaRacuna;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import models.TableModelStavkeRacuna;
@@ -212,6 +213,11 @@ public class FormDetaljiRacuna extends javax.swing.JDialog {
         jLabel7.setText("Ukupan iznos:");
 
         btnIzmeni.setText("Izmeni racun");
+        btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmeniActionPerformed(evt);
+            }
+        });
 
         btnStorniraj.setText("Storniraj racun");
 
@@ -372,6 +378,25 @@ public class FormDetaljiRacuna extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        try {
+            TableModelStavkeRacuna tm = (TableModelStavkeRacuna) tblStavke.getModel();
+
+            originalniRacun.setDatumVreme(new Date());
+            originalniRacun.setStatus("Aktivan");
+            originalniRacun.setUkupanIznos(ukupanIznos);
+            originalniRacun.setStavkeRacuna(tm.getLista());
+
+            ClientController.getInstance().updateRacun(originalniRacun);
+            FormPretragaRacuna fp = (FormPretragaRacuna) getParent();
+            fp.refreshTable();
+            JOptionPane.showMessageDialog(this, "Uspesno izmenjen racun");
+            this.dispose();
+        } catch (Exception ex){
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnIzmeniActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

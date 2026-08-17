@@ -78,4 +78,8 @@ public class ClientController {
         sendRequest(Operation.LOGOUT, ulogovani);
     }
 
+    public void updateRacun(Racun originalniRacun) throws Exception {
+        sendRequest(Operation.UPDATE_RACUN, originalniRacun);
+    }
+
 }

@@ -14,6 +14,7 @@ import so.musterija.SOGetAllMusterija;
 import so.obuca.SOGetAllObuca;
 import so.racun.SOAddRacun;
 import so.racun.SOGetAllRacun;
+import so.racun.SOUpdateRacun;
 
 /**
  *
@@ -70,6 +71,10 @@ public class ServerController {
 
     public void logout(Prodavac ulogovani) {
         ulogovaniProdavci.remove(ulogovani);
+    }
+
+    public void updateRacun(Racun racun) throws Exception {
+        (new SOUpdateRacun()).templateExecute(racun);
     }
 
 }
