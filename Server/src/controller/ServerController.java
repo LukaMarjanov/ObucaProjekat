@@ -13,6 +13,7 @@ import so.login.SOLogin;
 import so.musterija.SOGetAllMusterija;
 import so.obuca.SOGetAllObuca;
 import so.racun.SOAddRacun;
+import so.racun.SOCancelRacun;
 import so.racun.SOGetAllRacun;
 import so.racun.SOUpdateRacun;
 
@@ -75,6 +76,10 @@ public class ServerController {
 
     public void updateRacun(Racun racun) throws Exception {
         (new SOUpdateRacun()).templateExecute(racun);
+    }
+
+    public void cancelRacun(Racun racun) throws Exception {
+        (new SOCancelRacun()).templateExecute(racun);
     }
 
 }

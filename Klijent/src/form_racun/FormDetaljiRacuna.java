@@ -10,9 +10,12 @@ import domain.Racun;
 import domain.StavkaRacuna;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import models.TableModelStavkeRacuna;
+import session.Session;
 
 /**
  *
@@ -39,6 +42,14 @@ public class FormDetaljiRacuna extends javax.swing.JDialog {
         tblStavke.setModel(new TableModelStavkeRacuna(r.getStavkeRacuna()));
         ukupanIznos = r.getUkupanIznos();
         popuniObucu();
+
+        if (r.getStatus().equals("STORNO") || r.getStatus().equals("STORNIRAN")) {
+            btnStorniraj.setEnabled(false);
+            btnIzmeni.setEnabled(false);
+            cmbObuca.setEnabled(false);
+            btnDodaj.setEnabled(false);
+            btnObrisi.setEnabled(false);
+        }
 
     }
 
@@ -220,6 +231,11 @@ public class FormDetaljiRacuna extends javax.swing.JDialog {
         });
 
         btnStorniraj.setText("Storniraj racun");
+        btnStorniraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStornirajActionPerformed(evt);
+            }
+        });
 
         btnZatvori.setText("Zatvori");
         btnZatvori.addActionListener(new java.awt.event.ActionListener() {
@@ -393,10 +409,45 @@ public class FormDetaljiRacuna extends javax.swing.JDialog {
             fp.refreshTable();
             JOptionPane.showMessageDialog(this, "Uspesno izmenjen racun");
             this.dispose();
-        } catch (Exception ex){
-             JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnIzmeniActionPerformed
+
+    private void btnStornirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStornirajActionPerformed
+        int result = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da "
+                + "stornirate ovaj racun?", "Konfirmacija", JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+
+                ArrayList<StavkaRacuna> stornoStavke = new ArrayList<>();
+
+                for (StavkaRacuna sr : originalniRacun.getStavkeRacuna()) {
+                    stornoStavke.add(new StavkaRacuna(null, sr.getRb(), sr.getKolicina() * -1,
+                            sr.getCena(), sr.getIznos() * -1, sr.getObuca()));
+                }
+
+                Racun stornoRacun = new Racun(null, new Date(), "STORNO", originalniRacun.getRacunID(),
+                        originalniRacun.getUkupanIznos() * -1, Session.getInstance().getUlogovani(),
+                        originalniRacun.getMusterija(), stornoStavke);
+
+                ClientController.getInstance().cancelRacun(stornoRacun);
+                originalniRacun.setStatus("STORNIRAN");
+                ClientController.getInstance().updateRacun(originalniRacun);
+                FormPretragaRacuna fp = (FormPretragaRacuna) getParent();
+                fp.refreshTable();
+                JOptionPane.showMessageDialog(this, "Uspesno storniran racun.");
+                this.dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(FormDetaljiRacuna.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnStornirajActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

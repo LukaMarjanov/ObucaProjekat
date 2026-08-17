@@ -25,13 +25,13 @@ import transfer.util.ResponseStatus;
  * @author Luka
  */
 public class ThreadClient1 extends Thread {
-    
+
     Socket socket;
-    
+
     public ThreadClient1(Socket socket) {
         this.socket = socket;
     }
-    
+
     @Override
     public void run() {
         while (!socket.isClosed()) {
@@ -46,14 +46,14 @@ public class ThreadClient1 extends Thread {
                 //saljemo odgovor klijentu
                 ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                 oos.writeObject(response);
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
+
         }
     }
-    
+
     private Response handleRequest(Request request) {
         Response response = new Response(null, null, ResponseStatus.Success);
         try {
@@ -82,6 +82,9 @@ public class ThreadClient1 extends Thread {
                 case Operation.UPDATE_RACUN:
                     ServerController.getInstance().updateRacun((Racun) request.getData());
                     break;
+                case Operation.CANCEL_RACUN:
+                    ServerController.getInstance().cancelRacun((Racun) request.getData());
+                    break;
                 default:
                     return null;
             }
@@ -91,5 +94,5 @@ public class ThreadClient1 extends Thread {
         }
         return response;
     }
-    
+
 }

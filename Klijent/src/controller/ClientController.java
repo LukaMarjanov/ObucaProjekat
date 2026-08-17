@@ -82,4 +82,8 @@ public class ClientController {
         sendRequest(Operation.UPDATE_RACUN, originalniRacun);
     }
 
+    public void cancelRacun(Racun stornoRacun) throws Exception {
+        sendRequest(Operation.CANCEL_RACUN, stornoRacun);
+    }
+
 }
