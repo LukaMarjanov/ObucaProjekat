@@ -48,8 +48,11 @@ public class Lokacija extends AbstractDomainObject {
     public ArrayList<AbstractDomainObject> vratiListu(ResultSet rs) throws SQLException {
         ArrayList<AbstractDomainObject> lista = new ArrayList<>();
         while (rs.next()) {
-            Lokacija l = new Lokacija(rs.getLong("LokacijaID"),
-                    rs.getString("Grad"), rs.getString("Ulica"), rs.getInt("Broj"));
+             Lokacija l = new Lokacija(
+                    rs.getLong("LokacijaID"),
+                    rs.getString("L.Grad"),
+                    rs.getString("L.Ulica"),
+                    rs.getInt("L.Broj"));
             lista.add(l);
         }
         rs.close();
@@ -119,6 +122,11 @@ public class Lokacija extends AbstractDomainObject {
 
     public void setBroj(int broj) {
         this.broj = broj;
+    }
+
+    @Override
+    public String toString() {
+        return grad + ", " + ulica + " " + broj;
     }
 
 }

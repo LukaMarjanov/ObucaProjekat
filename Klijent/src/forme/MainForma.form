@@ -42,11 +42,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nova musterija"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miNovaMusterijaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miPretragaMusterije">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pretraga musterije"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miPretragaMusterijeActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

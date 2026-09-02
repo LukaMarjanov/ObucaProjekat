@@ -18,5 +18,15 @@ public interface Operation {
     public static final int LOGOUT = 6;
     public static final int UPDATE_RACUN = 7;
     public static final int CANCEL_RACUN = 8;
+    public static final int ADD_MUSTERIJA = 9;
+    public static final int DELETE_MUSTERIJA = 10;
+    public static final int UPDATE_MUSTERIJA = 11;
+    public static final int ADD_OBUCA = 12;
+    public static final int DELETE_OBUCA = 13;
+    public static final int UPDATE_OBUCA = 14;
+    public static final int ADD_LOKACIJA = 15;
+    public static final int DELETE_LOKACIJA = 16;
+    public static final int UPDATE_LOKACIJA = 17;
+    public static final int GET_ALL_LOKACIJA = 18;
 
 }

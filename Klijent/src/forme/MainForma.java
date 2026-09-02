@@ -10,6 +10,8 @@ import domain.Obuca;
 import domain.Prodavac;
 import domain.Racun;
 import domain.StavkaRacuna;
+import form_musterija.FormNovaMusterija;
+import form_musterija.FormPretragaMusterije;
 import form_racun.FormPretragaRacuna;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -53,11 +55,11 @@ public class MainForma extends javax.swing.JFrame {
                 public void windowClosing(WindowEvent e) {
                     int response = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da se odjavite?",
                             "Potvrda odjave", JOptionPane.YES_NO_OPTION);
-                    if(response == JOptionPane.YES_OPTION){
-                        try{
+                    if (response == JOptionPane.YES_OPTION) {
+                        try {
                             ClientController.getInstance().logout(ulogovani);
                             System.exit(0);
-                        }catch(Exception ex){
+                        } catch (Exception ex) {
                             Logger.getLogger(MainForma.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
@@ -319,9 +321,19 @@ public class MainForma extends javax.swing.JFrame {
         jMenu1.setText("Musterija");
 
         miNovaMusterija.setText("Nova musterija");
+        miNovaMusterija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovaMusterijaActionPerformed(evt);
+            }
+        });
         jMenu1.add(miNovaMusterija);
 
         miPretragaMusterije.setText("Pretraga musterije");
+        miPretragaMusterije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miPretragaMusterijeActionPerformed(evt);
+            }
+        });
         jMenu1.add(miPretragaMusterije);
 
         jMenuBar1.add(jMenu1);
@@ -519,6 +531,14 @@ public class MainForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miOdjaviSeActionPerformed
 
+    private void miNovaMusterijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaMusterijaActionPerformed
+        new FormNovaMusterija(this, true).setVisible(true);
+    }//GEN-LAST:event_miNovaMusterijaActionPerformed
+
+    private void miPretragaMusterijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPretragaMusterijeActionPerformed
+        new FormPretragaMusterije(this, true).setVisible(true);
+    }//GEN-LAST:event_miPretragaMusterijeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -611,7 +631,7 @@ public class MainForma extends javax.swing.JFrame {
         }
     }
 
-    private void popuniMusterije() {
+    public void popuniMusterije() {
         try {
             ArrayList<Musterija> listaMusterija = ClientController.getInstance().getAllMusterija(new Musterija(null,
                     "", "", "", "", null));

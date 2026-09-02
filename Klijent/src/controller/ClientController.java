@@ -4,6 +4,7 @@
  */
 package controller;
 
+import domain.Lokacija;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
@@ -86,4 +87,19 @@ public class ClientController {
         sendRequest(Operation.CANCEL_RACUN, stornoRacun);
     }
 
+    public void addMusterija(Musterija musterija) throws Exception {
+        sendRequest(Operation.ADD_MUSTERIJA, musterija);
+    }
+
+    public void updateMusterija(Musterija musterija) throws Exception {
+        sendRequest(Operation.UPDATE_MUSTERIJA, musterija);
+    }
+
+    public void deleteMusterija(Musterija musterija) throws Exception {
+        sendRequest(Operation.DELETE_MUSTERIJA, musterija);
+    }
+
+    public ArrayList<Lokacija> getAllLokacija(Lokacija lokacija) throws Exception {
+        return (ArrayList<Lokacija>) sendRequest(Operation.GET_ALL_LOKACIJA, lokacija);
+    }
 }

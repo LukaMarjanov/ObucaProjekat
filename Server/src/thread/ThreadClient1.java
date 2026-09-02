@@ -5,6 +5,7 @@
 package thread;
 
 import controller.ServerController;
+import domain.Lokacija;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
@@ -84,6 +85,18 @@ public class ThreadClient1 extends Thread {
                     break;
                 case Operation.CANCEL_RACUN:
                     ServerController.getInstance().cancelRacun((Racun) request.getData());
+                    break;
+                case Operation.ADD_MUSTERIJA:
+                    ServerController.getInstance().addMusterija((Musterija) request.getData());
+                    break;
+                case Operation.DELETE_MUSTERIJA:
+                    ServerController.getInstance().deleteMusterija((Musterija) request.getData());
+                    break;
+                case Operation.UPDATE_MUSTERIJA:
+                    ServerController.getInstance().updateMusterija((Musterija) request.getData());
+                    break;
+                case Operation.GET_ALL_LOKACIJA:
+                    response.setData(ServerController.getInstance().getAllLokacija((Lokacija) request.getData()));
                     break;
                 default:
                     return null;

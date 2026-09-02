@@ -4,13 +4,18 @@
  */
 package controller;
 
+import domain.Lokacija;
 import domain.Musterija;
 import domain.Obuca;
 import domain.Prodavac;
 import domain.Racun;
 import java.util.ArrayList;
 import so.login.SOLogin;
+import so.lokacija.SOGetAllLokacija;
+import so.musterija.SOAddMusterija;
+import so.musterija.SODeleteMusterija;
 import so.musterija.SOGetAllMusterija;
+import so.musterija.SOUpdateMusterija;
 import so.obuca.SOGetAllObuca;
 import so.racun.SOAddRacun;
 import so.racun.SOCancelRacun;
@@ -82,4 +87,21 @@ public class ServerController {
         (new SOCancelRacun()).templateExecute(racun);
     }
 
+    public void addMusterija(Musterija musterija) throws Exception {
+        (new SOAddMusterija()).templateExecute(musterija);
+    }
+
+    public void deleteMusterija(Musterija musterija) throws Exception {
+        (new SODeleteMusterija()).templateExecute(musterija);
+    }
+
+    public void updateMusterija(Musterija musterija) throws Exception {
+        (new SOUpdateMusterija()).templateExecute(musterija);
+    }
+
+      public ArrayList<Lokacija> getAllLokacija(Lokacija lokacija) throws Exception {
+        SOGetAllLokacija so = new SOGetAllLokacija();
+        so.templateExecute(lokacija);
+        return so.getLista();
+    }
 }
