@@ -81,7 +81,8 @@ public class Musterija extends AbstractDomainObject {
 
     @Override
     public String vrednostiZaUpdate() {
-        return " EMAIL = '" + email + "', TELEFON = '" + telefon + "', Lokacija = " + lokacija.getLokacijaID();
+          return " Email = '" + email + "', Telefon = '" + telefon + "', "
+                + "LokacijaID = " + lokacija.getLokacijaID();
     }
 
     @Override
