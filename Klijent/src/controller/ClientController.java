@@ -102,4 +102,29 @@ public class ClientController {
     public ArrayList<Lokacija> getAllLokacija(Lokacija lokacija) throws Exception {
         return (ArrayList<Lokacija>) sendRequest(Operation.GET_ALL_LOKACIJA, lokacija);
     }
+
+    public void addLokacija(Lokacija lokacija) throws Exception {
+        sendRequest(Operation.ADD_LOKACIJA, lokacija);
+    }
+
+    public void deleteLokacija(Lokacija lokacija) throws Exception {
+        sendRequest(Operation.DELETE_LOKACIJA, lokacija);
+    }
+
+    public void updateLokacija(Lokacija lokacija) throws Exception {
+        sendRequest(Operation.UPDATE_LOKACIJA, lokacija);
+    }
+
+    public void addObuca(Obuca obuca) throws Exception {
+        sendRequest(Operation.ADD_OBUCA, obuca);
+    }
+
+    public void deleteObuca(Obuca obuca) throws Exception {
+        sendRequest(Operation.DELETE_OBUCA, obuca);
+    }
+
+    public void updateObuca(Obuca obuca) throws Exception {
+        sendRequest(Operation.UPDATE_OBUCA, obuca);
+    }
+
 }

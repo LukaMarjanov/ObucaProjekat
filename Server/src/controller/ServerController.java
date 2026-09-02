@@ -11,12 +11,18 @@ import domain.Prodavac;
 import domain.Racun;
 import java.util.ArrayList;
 import so.login.SOLogin;
+import so.lokacija.SOAddLokacija;
+import so.lokacija.SODeleteLokacija;
 import so.lokacija.SOGetAllLokacija;
+import so.lokacija.SOUpdateLokacija;
 import so.musterija.SOAddMusterija;
 import so.musterija.SODeleteMusterija;
 import so.musterija.SOGetAllMusterija;
 import so.musterija.SOUpdateMusterija;
+import so.obuca.SOAddObuca;
+import so.obuca.SODeleteObuca;
 import so.obuca.SOGetAllObuca;
+import so.obuca.SOUpdateObuca;
 import so.racun.SOAddRacun;
 import so.racun.SOCancelRacun;
 import so.racun.SOGetAllRacun;
@@ -99,9 +105,33 @@ public class ServerController {
         (new SOUpdateMusterija()).templateExecute(musterija);
     }
 
-      public ArrayList<Lokacija> getAllLokacija(Lokacija lokacija) throws Exception {
+    public ArrayList<Lokacija> getAllLokacija(Lokacija lokacija) throws Exception {
         SOGetAllLokacija so = new SOGetAllLokacija();
         so.templateExecute(lokacija);
         return so.getLista();
+    }
+
+    public void addObuca(Obuca obuca) throws Exception {
+        (new SOAddObuca()).templateExecute(obuca);
+    }
+
+    public void addLokacija(Lokacija lokacija) throws Exception {
+        (new SOAddLokacija()).templateExecute(lokacija);
+    }
+
+    public void updateObuca(Obuca obuca) throws Exception {
+        (new SOUpdateObuca()).templateExecute(obuca);
+    }
+
+    public void updateLokacija(Lokacija lokacija) throws Exception {
+        (new SOUpdateLokacija()).templateExecute(lokacija);
+    }
+
+    public void deleteObuca(Obuca obuca) throws Exception {
+        (new SODeleteObuca()).templateExecute(obuca);
+    }
+
+    public void deleteLokacija(Lokacija lokacija) throws Exception {
+        (new SODeleteLokacija()).templateExecute(lokacija);
     }
 }

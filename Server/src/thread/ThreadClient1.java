@@ -98,6 +98,24 @@ public class ThreadClient1 extends Thread {
                 case Operation.GET_ALL_LOKACIJA:
                     response.setData(ServerController.getInstance().getAllLokacija((Lokacija) request.getData()));
                     break;
+                case Operation.ADD_OBUCA:
+                    ServerController.getInstance().addObuca((Obuca) request.getData());
+                    break;
+                case Operation.ADD_LOKACIJA:
+                    ServerController.getInstance().addLokacija((Lokacija) request.getData());
+                    break;
+                case Operation.DELETE_OBUCA:
+                    ServerController.getInstance().deleteObuca((Obuca) request.getData());
+                    break;
+                case Operation.DELETE_LOKACIJA:
+                    ServerController.getInstance().deleteLokacija((Lokacija) request.getData());
+                    break;
+                case Operation.UPDATE_OBUCA:
+                    ServerController.getInstance().updateObuca((Obuca) request.getData());
+                    break;
+                case Operation.UPDATE_LOKACIJA:
+                    ServerController.getInstance().updateLokacija((Lokacija) request.getData());
+                    break;
                 default:
                     return null;
             }

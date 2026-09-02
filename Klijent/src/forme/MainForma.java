@@ -10,8 +10,12 @@ import domain.Obuca;
 import domain.Prodavac;
 import domain.Racun;
 import domain.StavkaRacuna;
+import form_lokacija.FormNovaLokacija;
+import form_lokacija.FormPretragaLokacije;
 import form_musterija.FormNovaMusterija;
 import form_musterija.FormPretragaMusterije;
+import form_obuca.FormNovaObuca;
+import form_obuca.FormPretragaObuce;
 import form_racun.FormPretragaRacuna;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -341,6 +345,11 @@ public class MainForma extends javax.swing.JFrame {
         jMenu2.setText("Obuca");
 
         miNovaObuca.setText("Nova obuca");
+        miNovaObuca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovaObucaActionPerformed(evt);
+            }
+        });
         jMenu2.add(miNovaObuca);
 
         miPretragaObuce.setText("Pretraga obuce");
@@ -356,9 +365,19 @@ public class MainForma extends javax.swing.JFrame {
         jMenu3.setText("Lokacija");
 
         miNovaLokacija.setText("Nova lokacija");
+        miNovaLokacija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovaLokacijaActionPerformed(evt);
+            }
+        });
         jMenu3.add(miNovaLokacija);
 
         miPretragaLokacije.setText("Pretraga lokacije");
+        miPretragaLokacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miPretragaLokacijeActionPerformed(evt);
+            }
+        });
         jMenu3.add(miPretragaLokacije);
 
         jMenuBar1.add(jMenu3);
@@ -416,7 +435,8 @@ public class MainForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miPretragaObuceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPretragaObuceActionPerformed
-        // TODO add your handling code here:
+        new FormPretragaObuce(this, true).setVisible(true);
+
     }//GEN-LAST:event_miPretragaObuceActionPerformed
 
     private void cmbObucaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbObucaItemStateChanged
@@ -539,6 +559,20 @@ public class MainForma extends javax.swing.JFrame {
         new FormPretragaMusterije(this, true).setVisible(true);
     }//GEN-LAST:event_miPretragaMusterijeActionPerformed
 
+    private void miNovaObucaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaObucaActionPerformed
+        new FormNovaObuca(this, true).setVisible(true);
+    }//GEN-LAST:event_miNovaObucaActionPerformed
+
+    private void miNovaLokacijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaLokacijaActionPerformed
+        new FormNovaLokacija(this, true).setVisible(true);
+
+    }//GEN-LAST:event_miNovaLokacijaActionPerformed
+
+    private void miPretragaLokacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPretragaLokacijeActionPerformed
+        new FormPretragaLokacije(this, true).setVisible(true);
+
+    }//GEN-LAST:event_miPretragaLokacijeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -617,7 +651,7 @@ public class MainForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtUkupanIznos;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniObucu() {
+    public void popuniObucu() {
         try {
             ArrayList<Obuca> obuca = ClientController.getInstance().getAllObuca(new Obuca(null, "", "", 0, 0));
 
